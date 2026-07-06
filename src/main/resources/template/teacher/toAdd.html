@@ -1,35 +1,133 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>登记没收手机</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登记没收手机 - 课堂手机管理系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f5f7fa; min-height: 100vh; }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { color: white; font-size: 20px; }
+        .header .nav-links a { color: white; text-decoration: none; margin-left: 20px; padding: 8px 16px; border-radius: 5px; transition: background 0.3s; }
+        .header .nav-links a:hover { background: rgba(255,255,255,0.2); }
+
+        .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        h2 { color: #333; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #667eea; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #555; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .info-box {
+            background: #f8f9ff;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info-box p { color: #666; margin: 4px 0; }
+        .info-box strong { color: #333; }
+
+        .btn-group { display: flex; gap: 12px; margin-top: 24px; }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5a6fd6; }
+        .btn-secondary { background: #e9ecef; color: #666; }
+        .btn-secondary:hover { background: #dee2e6; }
+    </style>
 </head>
 <body>
-<h2>登记没收手机</h2>
-<form th:action="@{/teacher/addRecord}" method="post">
-    <input type="hidden" name="scheduleId" th:value="${scheduleId}">
-    <input type="hidden" name="weekNum" th:value="${weekNum}">
-    <input type="hidden" name="sectionNum" th:value="${sectionNum}">
-    <p>
-        <label>周次：</label>
-        <span th:text="${weekNum}"></span>
-    </p>
-    <p>
-        <label>节次：</label>
-        <span th:text="${sectionNum}"></span>
-    </p>
-    <p>
-        <label>没收数量：</label>
-        <input type="number" name="confiscateCount" min="1" required>
-    </p>
-    <p>
-        <label>柜子位置：</label>
-        <input type="text" name="cabinetLocation" placeholder="如：A栋101柜">
-    </p>
-    <p>
-        <button type="submit">提交</button>
-        <a href="/teacher/schedule">取消</a>
-    </p>
-</form>
+    <div class="header">
+        <h1>课堂手机管理系统</h1>
+        <div class="nav-links">
+            <a href="/">首页</a>
+            <a href="/teacher/schedule">我的课堂</a>
+            <a href="/teacher/recordList">记录管理</a>
+            <a href="/stat">统计报表</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>  登记没收手机</h2>
+
+            <div class="info-box">
+                <p>周次：<strong th:text="'第' + ${weekNum} + '周'"></strong></p>
+                <p>节次：<strong>
+                    <span th:if="${sectionNum == 1}">上午</span>
+                    <span th:if="${sectionNum == 2}">下午</span>
+                    <span th:if="${sectionNum == 3}">晚上</span>
+                </strong></p>
+            </div>
+
+            <form th:action="@{/teacher/addRecord}" method="post">
+                <input type="hidden" name="scheduleId" th:value="${scheduleId}">
+                <input type="hidden" name="weekNum" th:value="${weekNum}">
+                <input type="hidden" name="sectionNum" th:value="${sectionNum}">
+
+                <div class="form-group">
+                    <label>没收数量 *</label>
+                    <input type="number" name="confiscateCount" min="1" max="50" required placeholder="请输入没收手机数量">
+                </div>
+
+                <div class="form-group">
+                    <label>柜子位置</label>
+                    <input type="text" name="cabinetLocation" placeholder="如：A栋101柜、讲台左侧">
+                </div>
+
+                <div class="form-group">
+                    <label>备注</label>
+                    <input type="text" name="remark" placeholder="如：上课玩手机、课堂睡觉">
+                </div>
+
+                <div class="btn-group">
+                    <a href="/teacher/schedule" class="btn btn-secondary">取消</a>
+                    <button type="submit" class="btn btn-primary">提交登记</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
