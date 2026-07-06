@@ -22,6 +22,7 @@ public class PhoneConfiscateRecord {
     private Integer handoverStatus;
     private LocalDateTime handoverConfirmTime;
     private String cabinetLocation;
+    private String remark;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
