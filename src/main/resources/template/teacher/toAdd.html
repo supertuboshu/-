@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登记没收手机</title>
+</head>
+<body>
+<h2>登记没收手机</h2>
+<form th:action="@{/teacher/addRecord}" method="post">
+    <input type="hidden" name="scheduleId" th:value="${scheduleId}">
+    <input type="hidden" name="weekNum" th:value="${weekNum}">
+    <input type="hidden" name="sectionNum" th:value="${sectionNum}">
+    <p>
+        <label>周次：</label>
+        <span th:text="${weekNum}"></span>
+    </p>
+    <p>
+        <label>节次：</label>
+        <span th:text="${sectionNum}"></span>
+    </p>
+    <p>
+        <label>没收数量：</label>
+        <input type="number" name="confiscateCount" min="1" required>
+    </p>
+    <p>
+        <label>柜子位置：</label>
+        <input type="text" name="cabinetLocation" placeholder="如：A栋101柜">
+    </p>
+    <p>
+        <button type="submit">提交</button>
+        <a href="/teacher/schedule">取消</a>
+    </p>
+</form>
+</body>
+</html>

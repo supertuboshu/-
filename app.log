@@ -1,0 +1,57 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.phone:phone-manage >-----------------------
+[INFO] Building phone-manage 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.10:run (default-cli) > test-compile @ phone-manage >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ phone-manage ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 4 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ phone-manage ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 9 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ phone-manage ---
+[INFO] skip non existing resourceDirectory D:\idea\phone-manage\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ phone-manage ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 1 source file with javac [debug release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.2.10:run (default-cli) < test-compile @ phone-manage <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.10:run (default-cli) @ phone-manage ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v3.2.10)
+
+2026-07-03T11:44:05.756+08:00  INFO 47864 --- [           main] c.p.phonemanage.PhoneManageApplication   : Starting PhoneManageApplication using Java 17.0.12 with PID 47864 (D:\idea\phone-manage\target\classes started by 25765 in D:\idea\phone-manage)
+2026-07-03T11:44:05.758+08:00  INFO 47864 --- [           main] c.p.phonemanage.PhoneManageApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-07-03T11:44:06.509+08:00  INFO 47864 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-03T11:44:06.519+08:00  INFO 47864 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-03T11:44:06.519+08:00  INFO 47864 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-07-03T11:44:06.561+08:00  INFO 47864 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-03T11:44:06.562+08:00  INFO 47864 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 774 ms
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.8 
+2026-07-03T11:44:07.548+08:00  INFO 47864 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-07-03T11:44:07.555+08:00  INFO 47864 --- [           main] c.p.phonemanage.PhoneManageApplication   : Started PhoneManageApplication in 2.063 seconds (process running for 2.294)
+2026-07-03T11:44:19.247+08:00  INFO 47864 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-03T11:44:19.248+08:00  INFO 47864 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-03T11:44:19.249+08:00  INFO 47864 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-03T11:44:19.291+08:00  INFO 47864 --- [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-03T11:44:19.489+08:00  INFO 47864 --- [nio-8080-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@222f8618
+2026-07-03T11:44:19.490+08:00  INFO 47864 --- [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

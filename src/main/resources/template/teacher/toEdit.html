@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改记录</title>
+</head>
+<body>
+<h2>修改手机代管记录</h2>
+<form th:action="@{/teacher/updateRecord}" method="post">
+    <input type="hidden" name="id" th:value="${record.id}">
+    <p>
+        <label>没收数量：</label>
+        <input type="number" name="confiscateCount" th:value="${record.confiscateCount}" min="1" required>
+    </p>
+    <p>
+        <label>柜子位置：</label>
+        <input type="text" name="cabinetLocation" th:value="${record.cabinetLocation}">
+    </p>
+    <p>
+        <label>移交状态：</label>
+        <select name="handoverStatus">
+            <option value="0" th:selected="${record.handoverStatus == 0}">未移交</option>
+            <option value="1" th:selected="${record.handoverStatus == 1}">已移交</option>
+        </select>
+    </p>
+    <p>
+        <button type="submit">保存</button>
+        <a href="/teacher/recordList">取消</a>
+    </p>
+</form>
+</body>
+</html>

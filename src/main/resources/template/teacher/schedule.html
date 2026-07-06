@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师-我的课堂</title>
+</head>
+<body>
+<h2>近两日授课课堂</h2>
+<table border="1">
+    <tr>
+        <th>上课日期</th>
+        <th>周次</th>
+        <th>节次</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="item : ${scheduleList}">
+        <td th:text="${item.scheduleDate}"></td>
+        <td th:text="${item.weekNum}"></td>
+        <td th:text="${item.sectionNum}"></td>
+        <td>
+            <a th:href="@{/teacher/toAdd(scheduleId=${item.id},weekNum=${item.weekNum},sectionNum=${item.sectionNum})}">登记没收手机</a>
+        </td>
+    </tr>
+</table>
+<br>
+<a href="/teacher/recordList">查看我的手机代管记录</a>
+</body>
+</html>

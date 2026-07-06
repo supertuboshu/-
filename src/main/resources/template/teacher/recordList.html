@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>我的手机代管记录</title>
+</head>
+<body>
+<h2>本人课堂手机代管记录</h2>
+<table border="1">
+    <tr>
+        <th>记录ID</th>
+        <th>周次</th>
+        <th>节次</th>
+        <th>没收数量</th>
+        <th>柜子位置</th>
+        <th>登记时间</th>
+        <th>移交状态</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="r : ${recordList}">
+        <td th:text="${r.id}"></td>
+        <td th:text="${r.weekNum}"></td>
+        <td th:text="${r.sectionNum}"></td>
+        <td th:text="${r.confiscateCount}"></td>
+        <td th:text="${r.cabinetLocation}"></td>
+        <td th:text="${#temporals.format(r.confiscateTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${r.handoverStatus==0?'未移交':'已移交'}"></td>
+        <td>
+            <a th:href="@{/teacher/toEdit(id=${r.id})}">修改</a>
+            <form th:action="@{/teacher/deleteRecord}" method="post" style="display:inline;" onsubmit="return confirm('确定删除该记录？')">
+                <input type="hidden" name="id" th:value="${r.id}">
+                <button type="submit" style="border:none;background:none;color:red;cursor:pointer;">删除</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<a href="/teacher/schedule">返回我的课堂</a>
+</body>
+</html>

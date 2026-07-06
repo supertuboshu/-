@@ -1,0 +1,18 @@
+spring:
+  # 数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/class_phone_manage?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456 # 改成你自己的MySQL密码
+  # 关闭thymeleaf缓存，修改页面实时生效
+  thymeleaf:
+    prefix: classpath:/template/
+    cache: false
+
+# MyBatis-Plus 顶格写，和spring同级，下方全部2空格缩进
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.phone.phonemanage.entity
+  configuration:
+    map-underscore-to-camel-case: true # 数据库下划线自动转实体驼峰
