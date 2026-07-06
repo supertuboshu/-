@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计报表 - 课堂手机管理系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #333; margin-bottom: 10px; }
+        .header .total { font-size: 24px; color: #e74c3c; font-weight: bold; }
+        .nav { margin-bottom: 20px; text-align: center; }
+        .nav a { display: inline-block; margin: 0 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+        .nav a:hover { background: #2980b9; }
+        .nav a.active { background: #27ae60; }
+        .card { background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card h2 { color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #3498db; color: white; }
+        tr:hover { background: #f9f9f9; }
+        .bar { height: 20px; background: #3498db; border-radius: 10px; margin: 5px 0; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .stat-label { font-weight: bold; color: #555; }
+        .stat-value { font-size: 18px; color: #e74c3c; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #95a5a6; color: white; text-decoration: none; border-radius: 5px; }
+        .back-btn:hover { background: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>课堂手机管理系统 - 统计报表</h1>
+            <p>没收手机总数：<span class="total" th:text="${totalCount}">0</span> 部</p>
+        </div>
+
+        <div class="nav">
+            <a href="#class" class="active">按班级</a>
+            <a href="#teacher">按教师</a>
+            <a href="#course">按课程</a>
+            <a href="#week">按周次</a>
+            <a href="#section">按节次</a>
+            <a href="#semester">按学期</a>
+            <a href="#time">按时间</a>
+            <a href="#status">按状态</a>
+        </div>
+
+        <!-- 按班级统计 -->
+        <div class="card" id="class">
+            <h2>按班级统计</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>班级名称</th>
+                        <th>没收数量</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${statByClass}">
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.count}"></td>
+                        <td>
+                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
+                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 按教师统计 -->
+        <div class="card" id="teacher">
+            <h2>按教师统计</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>教师姓名</th>
+                        <th>没收数量</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${statByTeacher}">
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.count}"></td>
+                        <td>
+                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
+                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 按课程统计 -->
+        <div class="card" id="course">
+            <h2>按课程统计</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>课程名称</th>
+                        <th>没收数量</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${statByCourse}">
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.count}"></td>
+                        <td>
+                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
+                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 按周次统计 -->
+        <div class="card" id="week">
+            <h2>按周次统计</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>周次</th>
+                        <th>没收数量</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${statByWeek}">
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.count}"></td>
+                        <td>
+                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
+                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 按节次统计 -->
+        <div class="card" id="section">
+            <h2>按节次统计</h2>
+            <div class="grid">
+                <div class="stat-row" th:each="item : ${statBySection}">
+                    <span class="stat-label" th:text="${item.name}"></span>
+                    <span class="stat-value" th:text="${item.count} + ' 部'"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 按学期统计 -->
+        <div class="card" id="semester">
+            <h2>按学期统计</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>学期</th>
+                        <th>没收数量</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${statBySemester}">
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.count}"></td>
+                        <td>
+                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
+                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 按时间统计 -->
+        <div class="card" id="time">
+            <h2>按时间范围统计</h2>
+            <div class="grid">
+                <div class="stat-row" th:each="item : ${statByTimeRange}">
+                    <span class="stat-label" th:text="${item.name}"></span>
+                    <span class="stat-value" th:text="${item.count} + ' 部'"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 按移交状态统计 -->
+        <div class="card" id="status">
+            <h2>按移交状态统计</h2>
+            <div class="grid">
+                <div class="stat-row" th:each="item : ${statByHandover}">
+                    <span class="stat-label" th:text="${item.name}"></span>
+                    <span class="stat-value" th:text="${item.count} + ' 条记录'"></span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/teacher/recordList" class="back-btn">返回记录列表</a>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

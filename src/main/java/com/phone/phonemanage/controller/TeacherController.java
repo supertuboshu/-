@@ -91,4 +91,9 @@ public class TeacherController {
         recordService.removeById(id);
         return "redirect:/teacher/recordList";
     }
+
+    @GetMapping("/stat")
+    public String redirectToStat() {
+        return "redirect:/stat";
+    }
 }

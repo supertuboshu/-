@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>教师-我的课堂</title>
+    <style>
+        .nav-link { display: inline-block; margin: 10px 5px; padding: 8px 16px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+        .nav-link:hover { background: #2980b9; }
+        .nav-link.stat { background: #27ae60; }
+        .nav-link.stat:hover { background: #219a52; }
+    </style>
 </head>
 <body>
 <h2>近两日授课课堂</h2>
+<div style="margin: 15px 0;">
+    <a href="/teacher/recordList" class="nav-link">我的记录</a>
+    <a href="/stat" class="nav-link stat">统计报表</a>
+</div>
 <table border="1">
     <tr>
         <th>上课日期</th>
