@@ -39,10 +39,6 @@ public class StatController {
         List<StatReport> bySection = statReportService.statBySection();
         model.addAttribute("statBySection", bySection);
 
-        // 按学期统计
-        List<StatReport> bySemester = statReportService.statBySemester();
-        model.addAttribute("statBySemester", bySemester);
-
         // 按移交状态统计
         List<StatReport> byHandover = statReportService.statByHandoverStatus();
         model.addAttribute("statByHandover", byHandover);

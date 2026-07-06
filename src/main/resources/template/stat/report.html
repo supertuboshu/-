@@ -43,7 +43,6 @@
             <a href="#course">按课程</a>
             <a href="#week">按周次</a>
             <a href="#section">按节次</a>
-            <a href="#semester">按学期</a>
             <a href="#time">按时间</a>
             <a href="#status">按状态</a>
         </div>
@@ -153,30 +152,6 @@
                     <span class="stat-value" th:text="${item.count} + ' 部'"></span>
                 </div>
             </div>
-        </div>
-
-        <!-- 按学期统计 -->
-        <div class="card" id="semester">
-            <h2>按学期统计</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>学期</th>
-                        <th>没收数量</th>
-                        <th>占比</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="item : ${statBySemester}">
-                        <td th:text="${item.name}"></td>
-                        <td th:text="${item.count}"></td>
-                        <td>
-                            <div class="bar" th:style="'width: ' + ${totalCount > 0 ? (item.count * 100 / totalCount) : 0} + '%'"></div>
-                            <span th:text="${#numbers.formatDecimal(totalCount > 0 ? (item.count * 100.0 / totalCount) : 0, 1, 1)} + '%'"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <!-- 按时间统计 -->

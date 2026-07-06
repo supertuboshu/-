@@ -33,10 +33,6 @@ public class StatReportService {
         return statReportMapper.statBySection();
     }
 
-    public List<StatReport> statBySemester() {
-        return statReportMapper.statBySemester();
-    }
-
     public List<StatReport> statByHandoverStatus() {
         return statReportMapper.statByHandoverStatus();
     }
